@@ -3,15 +3,15 @@ AutoLogHunter is my first independent cybersecurity scripting project. I built t
 
 This Python script parses system log files and identifies potentially suspicious activities such as brute-force login attempts, SSH authentication failures, and login anomalies. Alerts are displayed on the console and optionally saved to an output file.
 
-🔍 Key Features:
+Key Features:
 
-- Parses custom or system log files (test.log)
+Parses custom or system log files (test.log)
 
 Detects:
-Failed SSH login attempts
-Brute-force behavior from suspcious IPs
-Invalid user logins
-Supports keyword-based scanning
+- Failed SSH login attempts
+- Brute-force behavior from suspcious IPs
+- Invalid user logins
+- Supports keyword-based scanning
 
 My Setup & Roadblocks:
 
@@ -27,11 +27,11 @@ Logs host authentication events are triggered by users that attempt to access re
 1. To Open Terminal press "cmmd + spacebar" and search terminal and open it 
 
 2. Create a Working Directory with commands:
-    cd ~
-    mkdir AutoLogHunter // make new directory
-    cd AutoLogHunter // change into direcory
+- cd ~
+- mkdir AutoLogHunter // make new directory
+- cd AutoLogHunter // change into direcory
 
-3. Create the Python Script:
+3. Create the Python Script: --> check autoLogHunter.py for commented code
     nano autologhunter.py
 
 4. Create a Fake Test Log File since auth.logs cannot be accessed:
