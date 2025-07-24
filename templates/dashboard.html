@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoLogHunter Dashboard</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f2f5;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            color: white;
+        }
+        .CRITICAL { background-color: #e74c3c; }
+        .WARNING  { background-color: #f39c12; }
+        .INFO     { background-color: #27ae60; }
+        .UNKNOWN  { background-color: #7f8c8d; }
+        .no-ip {
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🔍 AutoLogHunter Dashboard</h1>
+
+    <h2>🔥 Top Brute-force IPs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>IP Address</th>
+                <th>Attempt Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ip in top_ips %}
+            <tr>
+                <td>{{ ip['ip'] }}</td>
+                <td>{{ ip['count'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>🧾 Recent Log Events</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>IP</th>
+                <th>Severity</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log['timestamp'] }}</td>
+                <td>{{ log['ip'] or '-' }}</td>
+                <td><span class="badge {{ log['severity'] }}">{{ log['severity'] }}</span></td>
+                <td>{{ log['message'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
