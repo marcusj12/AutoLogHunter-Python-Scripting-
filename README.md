@@ -1,64 +1,39 @@
-# AutoLogHunter-Python-Scripting-
-AutoLogHunter is my first independent cybersecurity scripting project. I built this tool to improve my understanding of log analysis, Linux system behavior, and real-world threat detection techniques relevant to cybersecurity defense.
+# 🔍 AutoLogHunter3
 
-This Python script parses system log files and identifies potentially suspicious activities such as brute-force login attempts, SSH authentication failures, and login anomalies. Alerts are displayed on the console and optionally saved to an output file.
+AutoLogHunter3 is a real-time Linux log monitoring and anomaly detection tool written in Python. It’s built to identify suspicious authentication behavior, tag severity levels, score IP activity, and visualize flagged events through a live dashboard.
 
-Key Features:
+> Built to grow with me as I grow as a cybersecurity engineer.
 
-Parses custom or system log files (test.log)
+---
 
-Detects:
-- Failed SSH login attempts
-- Brute-force behavior from suspcious IPs
-- Invalid user logins
-- Supports keyword-based scanning
+## 🚀 Features
 
-My Setup & Roadblocks:
+- 📡 **Real-Time Log Monitoring** (`tail -f` style)
+- 🛑 **Severity Tagging** (INFO, WARNING, CRITICAL)
+- 🔐 **Brute-Force Detection** via IP scoring
+- 💾 **Persistent Event Storage** (SQLite)
+- 🌐 **Flask Dashboard** to visualize and review events
+- 🧪 **Test Log Parser** that mimics `/var/log/auth.log`
 
-While setting this project up, I used a Kali Linux VM running in Oracle VirtualBox. Initially, I intended to parse /var/log/auth.log, which logs authentication attempts. However, I found the file was either missing or inaccessible due to logging not being enabled by default.
+---
 
-Since I'm working on a MacBook, I couldn't access /var/log/auth.log there either — macOS uses a unified log system that doesn't expose these logs in plain text. To move forward, I simulated log entries in a test file.
+## 🧠 Problems I Faced + Lessons Learned
 
-Logs host authentication events are triggered by users that attempt to access resources.
+| Challenge | Solution |
+|----------|-----------|
+| Dashboard wouldn’t load results | Learned I needed to actually trigger log events with matching keywords to create the `logs` table |
+| Got `no such table: logs` errors | Realized the database file was created before `init_db()` existed — fixed by deleting `.db` and re-running |
+| Log test cases weren't realistic | Replaced hardcoded tags with real-looking syslog-style lines |
+| Confused about how updates overwrite the README | Learned that Git keeps history of all commits and README versions |
 
+---
 
-⚙️ Setup Instructions: 
+## 🧱 Architecture Overview
 
-1. To Open Terminal press "cmmd + spacebar" and search terminal and open it 
-
-2. Create a Working Directory with commands:
-- cd ~
-- mkdir AutoLogHunter // make new directory
-- cd AutoLogHunter // change into direcory
-
-3. Create the Python Script: --> check autoLogHunter.py for commented code
-    nano autologhunter.py
-
-4. Create a Fake Test Log File since auth.logs cannot be accessed:
-    - "May 27 18:01:03 server sshd[1234]: Failed password for invalid user root from 192.168.1.12"
-    - "May 27 18:02:45 server sshd[1235]: Failed password for invalid user admin from 192.168.1.14"
-    - "May 27 18:07:10 server sshd[1236]: Accepted password for user marcus from 192.168.1.10 port 22 ssh2"
-    - "May 27 18:10:00 server login[5678]: login failure for user test from 192.168.1.20"
-
-
-🚀 Possible Next Steps:
-Add Timestamp & Severity Tagging: Enhance detection by tagging events with severity levels (e.g., INFO, WARNING, CRITICAL) based on behavior patterns and timestamps.
-
-- Export Results: Include functionality to save anomalies to a .txt or .csv report for review and documentation.
-
-- Integrate IP Geo-lookup: Add a module to map suspicious IP addresses to geographic locations for better threat context.
-
-- Implement Regex for Flexibility: Replace static keyword matching with regular expressions to capture a wider range of threats.
-
-- Build a GUI: Create a simple graphical user interface using Tkinter or Flask to make the tool more user-friendly.
-
-- Transition to Real Logs: Once I have access to live logs in a Linux environment (e.g., via Splunk or a deployed server), I will adapt AutoLogHunter for real-world use.
-
-- This is just the beginning of my cybersecurity scripting journey. Each iteration will bring me closer to building production-level tools for threat detection and SOC environments.
-
-🧠 Conclusion & Lessons Learned:
-
-This project was a crucial first step in applying my cybersecurity knowledge through hands-on scripting. By building AutoLogHunter, I deepened my understanding of how authentication logs reveal system activity and how attackers may attempt to breach systems through brute force or unauthorized access. Writing this script helped me grasp the value of log analysis for early threat detection and the importance of customizing tools to fit the limitations of different operating systems.
-
-Through trial and error, I learned how to adapt to OS-specific logging mechanisms, simulate data when real-world logs aren’t available, and implement basic parsing logic in Python. It also taught me how to think like an analyst—spotting patterns, filtering out noise, and highlighting what's truly suspicious.
+```plaintext
+AutoLogHunter3.py         # CLI log scanner + DB writer
+dashboard.py              # Flask dashboard for results
+templates/dashboard.html  # UI for event review
+test.log                  # Sample logs for testing
+autologhunter.db          # SQLite storage (created on first run)
 
