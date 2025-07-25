@@ -1,4 +1,4 @@
-# AutoLogHunter-Python-Scripting- "Intial Version of AutoLogHunter"
+# AutoLogHunter-Python-Scripting- "Initial Version of AutoLogHunter"
 AutoLogHunter is my first independent cybersecurity scripting project. I built this tool to improve my understanding of log analysis, Linux system behavior, and real-world threat detection techniques relevant to cybersecurity defense.
 
 This Python script parses system log files and identifies potentially suspicious activities such as brute-force login attempts, SSH authentication failures, and login anomalies. Alerts are displayed on the console and optionally saved to an output file.
