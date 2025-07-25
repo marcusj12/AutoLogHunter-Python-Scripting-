@@ -1,4 +1,8 @@
 # 🔍 AutoLogHunter3
+=======
+# AutoLogHunter-Python-Scripting- "Initial Version of AutoLogHunter"
+AutoLogHunter is my first independent cybersecurity scripting project. I built this tool to improve my understanding of log analysis, Linux system behavior, and real-world threat detection techniques relevant to cybersecurity defense.
+
 
 AutoLogHunter3 is a real-time Linux log monitoring and anomaly detection tool written in Python. It’s built to identify suspicious authentication behavior, tag severity levels, score IP activity, and visualize flagged events through a live dashboard.
 
